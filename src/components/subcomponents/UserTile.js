@@ -6,7 +6,6 @@ class UserTile extends Component{
     render(){
 
         const user=this.props.user
-
         return(
             <Link to={`/user/${user.id}`} className="UserTile">
                 {user.img ? <img src={user.img} alt="profile pic"/> :<img src={'https://unsplash.it/300/?random'} alt="profile pic"/>}

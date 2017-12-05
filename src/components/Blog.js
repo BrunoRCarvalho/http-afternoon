@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Formated from './subcomponents/Formated';
 
-// import axios
+import axios from 'axios'
 
 class Blog extends Component{
     constructor(){
@@ -12,13 +12,13 @@ class Blog extends Component{
         }
     }
 
-    // insert componentWillMount method
+    componentWillMount() {
+      axios.get(`/api/blog/${this.props.match.id}`).then(r => this.setState({ blog: r.data })).catch(console.log)
+    }
 
-    
-    render(){
-        const blog = this.state.blog;
-        return(
-            
+  render () {
+    const blog = this.state.blog;
+    return (
             <div className='content blog-content' >
                     <div className="blog-img" style={{backgroundImage: `url(${blog.image})`, backgroundSize:'cover'}}>
                         <h1>{blog.title}</h1>

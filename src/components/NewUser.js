@@ -4,23 +4,38 @@ import React, { Component } from 'react';
 import axios from 'axios'
 
 class NewUser extends Component{
-    constructor(){
-        super()
-        this.state={
-            name: '',
-            img: '',
-            desc: ''
-        }
-    }
-    
-    // insert addUser
-
+    constructor() {
+      super()
+      this.state = {
+        name: '',
+        img: '',
+        desc: ''
+      }
+    } // insert addUser
+addUser () {
+        axios.post('/api/users', this.state).then(r => {
+            let user = r.data
+            this.props.history.push(`/user/${user.id}`)
+        })
+}
 
     // insert updateUser    
-
+updateUser(){
+        let id = this.props.match.params.id
+        axios.put(`/api/user/${id}`, this.state).then(r=>{
+            console.log(r)
+            let user = r.data
+            this.props.history.push(`/user/${user.id}`)
+        })
+    }
 
     // insert deleteUser
-
+deleteUser(){
+        let id = this.props.match.params.id
+        axios.delete(`api/user/${id}`).then(r => {
+            this.props.history.push(`/search`)
+        })
+    }
 
     render(){
         return(
